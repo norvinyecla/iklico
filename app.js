@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 /* first page to send */
 app.get('/', function (req, res){
-  res.send("Hello World!");
+  res.send("<form></form>");
 });
 
 // POST http://localhost:8080/add
