@@ -5,8 +5,6 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-var MongoClient = require('mongodb').MongoClient;
-
 /* first page to send */
 app.get('/', function (req, res){
   res.send("Hello World!");
@@ -21,23 +19,23 @@ app.post('/add', function(req, res){
 });
 
 /* forward to corresponding URL*/
-app.get('/:link', function(req, res){
+app.get('/apples/:link', function(req, res){
   var shortLink = req.params.link;
+  var MongoClient = require('mongodb').MongoClient;
 
-  MongoClient.connect('mongodb://localhost:27017/iklico', function(err, db) {
-  if (err) {
-    throw err;
-  }
-  db.collection('shortlinks').find({shortcut: shortLink}).toArray(function(err, result) {
-    if (err) {
-      throw err;
-    }
-  realUrl = result[0].url; 
-  console.log(realUrl); 
-  res.redirect(301, 'http://' + realUrl);
-  });
-});
-
+  MongoClient.connect("mongodb://localhost:27017/iklico", function(err, db) {
+    db.collection("shortlinks").find({shortcut: shortLink}, function(err, docs) {
+    docs.each(function(err, doc) {
+        if(doc) {
+          console.log(doc);
+          res.redirect(301, 'http://' + doc.url);
+        }
+        else {
+          res.end();
+        }
+      });
+    });      
+  });      
 });
 
 app.listen(3000, function(){
