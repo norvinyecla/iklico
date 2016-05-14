@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var fs = require('fs');
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
@@ -7,14 +8,18 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 /* first page to send */
 app.get('/', function (req, res){
-  res.send("<form></form>");
+  fs.readFile('form.html', function(err, data){
+    res.writeHead(200, {'Content-Type': 'text/html', 'Content-Length': data.length });
+    res.write(data);
+    res.end();
+  });
 });
 
 // POST http://localhost:8080/add
 // parameters sent with
 app.post('/add', function(req, res){
-  var url = req.body.url;
-
+  var url = req.body;
+  console.log(req.body);
   res.send('this is the original url ' + url);
 });
 
