@@ -19,20 +19,19 @@ app.get('/', function (req, res){
 // parameters sent with
 app.post('/add', function(req, res){
   var url = req.body.url;
+  var shortLink;
   do {
-    console.log('generating link');
     shortLink = generateLink(url);
-
   } while (hasADuplicate(shortLink));
 
   var MongoClient = require('mongodb').MongoClient;
   MongoClient.connect("mongodb://localhost:27017/iklico", function(err, db) {
     db.collection("shortlinks").insert({url: url, shortcut: shortLink});
-    console.log('done adding the url to the db');
+    console.log('done adding the url ' + shortLink + ' to the db');
   });
 
   console.log(shortLink);
-  res.send('this is the shortened url: ' + shortLink + '<br/> this is the original url' + url);
+  res.send('this is the shortened url: ' + shortLink + '<br/> this is the original url: ' + url);
 });
 
 /* forward to corresponding URL*/
@@ -44,9 +43,7 @@ app.get('/apples/:link', function(req, res){
     db.collection("shortlinks").find({shortcut: shortLink}, function(err, docs) {
     docs.each(function(err, doc) {
         if(doc) {
-          res.send('original URL is '+shortLink);
-          console.log(doc);
-          //res.redirect(301, 'http://' + doc.url);
+          res.redirect(301, 'http://' + doc.url);
         }
         else {
           res.end();
@@ -62,15 +59,16 @@ app.listen(3000, function(){
 
 function generateLink(url){
   var chars = '';
-  alpha = "abc";
-  nums = "23456789"
-  for (i = 0; i < 2; i++){
+  //alpha = "abcdefghjkmnopqrstuvwxyz";
+  alpha = "wxyz";
+  //nums = "23456789"
+  for (i = 0; i < 5; i++){
     chars += alpha.charAt(Math.floor(Math.random()*alpha.length));
   }
 
-  // for (i = 0; i < 2; i++){
-  //   chars += nums.charAt(Math.floor(Math.random()*nums.length));
-  // }
+  for (i = 0; i < 2; i++){
+    //chars += nums.charAt(Math.floor(Math.random()*nums.length));
+  }
 
   return chars;
 
@@ -79,17 +77,27 @@ function generateLink(url){
 function hasADuplicate(shortLink){
   var MongoClient = require('mongodb').MongoClient;
   MongoClient.connect("mongodb://localhost:27017/iklico", function(err, db) {
-    db.collection("shortlinks").find({shortcut: shortLink}, function(err, docs) {
-      if (docs.count() > 0) {
-        console.log("has a duplicate.");
+    collection = db.collection("shortlinks");
+
+    // Insert some users
+    collection.find({shortcut: shortLink}).toArray(function (err, result) {
+      if (err) {
+        console.log(err);
+      } else if (result.length) {
+
+        console.log("you have a duplicate "+ result.length + "! generating another");
         return true;
-      }
-      else {
-        console.log(docs);
+      } else {
+        console.log("no duplicate!");
         return false;
       }
+      //Close connection
+      db.close();
     });
+
   });
+
+  
 }
 
 
