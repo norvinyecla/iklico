@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+		<style>
+			#mainForm { 
+				color: gray; 
+				border-color: #f7f7f7;
+				border-radius: 1em;
+				padding: 1em;
+			}
+
+			#url, #button-main {
+				min-height: 4em;
+				max-height: 7em;
+				margin: 0.5%;
+			}
+
+			#url {
+				min-width: 70%;
+				
+			}
+
+			#button-main {
+				min-width: 20%;
+			}
+
+			#main-container {
+				margin: 0 auto;
+				min-height: 1000px;
+			}
+
+			#box-container {
+				margin: 0 auto;
+				width: 100%;
+				min-height: 1000px;
+				background-color: #e7e7e7;
+				position: relative;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+
+
+		</style>
+	</head>
+
+	<body>
+	  <div class="container" id="main-container">
+	    <div class="container" id="box-container">
+			<form action="add" method="post" id="mainForm" class="form-inline">
+			    <input type="text" name="url" class="form-control col-md-10" onfocus="this.placeholder = ''" onblur="this.placeholder='Put your URL here'" autocomplete="off" id="url">
+				<input type="submit" class="btn btn-success col-md-2" id="button-main">
+			</form>
+		</div>
+
+	  </div>
+	</body>
+</html>

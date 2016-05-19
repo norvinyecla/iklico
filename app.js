@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 /* first page to send */
 app.get('/', function (req, res){
-  fs.readFile('form.html', function(err, data){
+  fs.readFile('views/form.html', function(err, data){
     res.writeHead(200, {'Content-Type': 'text/html', 'Content-Length': data.length });
     res.write(data);
     res.end();
