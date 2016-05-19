@@ -31,8 +31,7 @@ app.post('/add', function(req, res){
   });
 
   console.log(shortLink);
-  res.send('this is the shortened url: ' + shortLink + '<br/> this is the original url: ' + url);
-});
+  res.render('views/add.html', {shortlink: shortLink});  });
 
 /* forward to corresponding URL*/
 app.get('/apples/:link', function(req, res){
