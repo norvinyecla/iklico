@@ -2,6 +2,7 @@
 	<head>
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<link href='https://fonts.googleapis.com/css?family=Cabin:400,700' rel='stylesheet' type='text/css'>
 
 		<style>
 			#mainForm { 
@@ -18,39 +19,60 @@
 			}
 
 			#url {
-				min-width: 70%;
-				
+				width: 60%;
 			}
 
 			#button-main {
-				min-width: 20%;
+				width: 20%;
 			}
 
 			#main-container {
 				margin: 0 auto;
-				min-height: 1000px;
+				padding: 0;
+				height: 100%;
 			}
 
 			#box-container {
-				margin: 0 auto;
-				width: 100%;
-				min-height: 1000px;
-				background-color: #e7e7e7;
-				position: relative;
-				top: 50%;
-				transform: translateY(-50%);
+				background-color: white;
+				
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
 			}
 
+			#box-container h1 {
+				width: 100%;
+				font-weight: 400;
+			}
+
+			form {
+				background-color: #e7e7e7;
+				width: 100%;
+			}
+
+			input {
+				font-size: 7em;
+			}
+			
+			* {
+				font-family: 'Cabin', sans-serif;
+			}
 
 		</style>
 	</head>
 
 	<body>
 	  <div class="container" id="main-container">
+	  	<div class="container" id="">
+	  		
+	  	</div>
 	    <div class="container" id="box-container">
+	    	<h1>Ikli.co</h1>
 			<form action="add" method="post" id="mainForm" class="form-inline">
-			    <input type="text" name="url" class="form-control col-md-10" onfocus="this.placeholder = ''" onblur="this.placeholder='Put your URL here'" autocomplete="off" id="url">
-				<input type="submit" class="btn btn-success col-md-2" id="button-main">
+			    <input type="text" name="url" class="form-control" onfocus="this.placeholder = ''" onblur="this.placeholder='Put your URL here'" placeholder="Put your URL here" autocomplete="off" style="font-size: 1.25em" id="url">
+				<input type="submit" class="btn btn-success" id="button-main" style="font-size: 1.35em">
 			</form>
 		</div>
 
