@@ -1,0 +1,54 @@
+#mainForm { 
+	color: gray; 
+	border-color: #f7f7f7;
+	border-radius: 1em;
+	padding: 1em;
+}
+
+#url, #button-main {
+	min-height: 4em;
+	max-height: 7em;
+	margin: 0.5%;
+}
+
+#url {
+	width: 60%;
+}
+
+#button-main {
+	width: 20%;
+}
+
+#main-container {
+	margin: 0 auto;
+	padding: 0;
+	height: 100%;
+}
+
+#box-container {
+	background-color: white;
+	
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+#box-container h1 {
+	width: 100%;
+	font-weight: 400;
+}
+
+form {
+	background-color: #e7e7e7;
+	width: 100%;
+}
+
+input {
+	font-size: 7em;
+}
+
+* {
+	font-family: 'Cabin', sans-serif;
+}
