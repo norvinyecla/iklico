@@ -27,7 +27,7 @@ app.post('/success', function(req, res){
   } while (hasADuplicate(shortLink));
 
   var MongoClient = require('mongodb').MongoClient;
-  MongoClient.connect("mongodb://localhost:27017/iklico", function(err, db) {
+  MongoClient.connect("mongodb://192.168.17.135:56565/iklico", function(err, db) {
     db.collection("shortlinks").insert({url: url, shortcut: shortLink});
   });
 
@@ -38,7 +38,7 @@ app.get('/:link', function(req, res){
   var shortLink = req.params.link;
   var MongoClient = require('mongodb').MongoClient;
 
-  MongoClient.connect("mongodb://localhost:27017/iklico", function(err, db) {
+  MongoClient.connect("mongodb://192.168.17.135:56565/iklico", function(err, db) {
     db.collection("shortlinks").find({shortcut: shortLink}, function(err, docs) {
     docs.each(function(err, doc) {
         if(doc) {
@@ -74,7 +74,7 @@ function generateLink(url){
 
 function hasADuplicate(shortLink){
   var MongoClient = require('mongodb').MongoClient;
-  MongoClient.connect("mongodb://localhost:27017/iklico", function(err, db) {
+  MongoClient.connect("mongodb://192.168.17.135:56565/iklico", function(err, db) {
     collection = db.collection("shortlinks");
 
     // Insert some users
