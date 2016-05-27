@@ -52,3 +52,28 @@ input {
 * {
 	font-family: 'Cabin', sans-serif;
 }
+
+@media (max-width: 767px) {
+	input {
+		font-size: 4em;
+	}
+
+	#url, #button-main {
+		min-height: 3em;
+		max-height: 4em;
+	}
+
+	#url {
+		width: 70%;
+	}
+
+	#button-main {
+		padding: 0;
+	}
+
+	form {
+		display: flex;
+		flex-direction: row;
+	}
+
+}
