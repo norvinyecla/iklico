@@ -2,8 +2,6 @@ var express = require('express');
 var app = express();
 var fs = require('fs');
 
-
-
 var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
@@ -42,7 +40,7 @@ app.get('/:link', function(req, res){
     db.collection("shortlinks").find({shortcut: shortLink}, function(err, docs) {
     docs.each(function(err, doc) {
         if(doc) {
-          res.redirect(301, 'http://' + doc.url);
+          res.redirect(301, qualifyUrl(doc.url));
         }
         else {
           res.end();
@@ -94,6 +92,13 @@ function hasADuplicate(shortLink){
     });
 
   });
+
+function qualifyUrl(url){
+  if (url.lastIndexOf('https://', 0) === 0 || url.lastIndexOf('http://', 0) === 0 ){
+    return url;
+  }
+  else return 'http://' + url;
+}
 
   
 }
