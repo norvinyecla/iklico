@@ -91,7 +91,8 @@ function hasADuplicate(shortLink){
       db.close();
     });
 
-  });
+  });  
+}
 
 function qualifyUrl(url){
   if (url.lastIndexOf('https://', 0) === 0 || url.lastIndexOf('http://', 0) === 0 ){
@@ -100,8 +101,6 @@ function qualifyUrl(url){
   else return 'http://' + url;
 }
 
-  
-}
 
 
 
